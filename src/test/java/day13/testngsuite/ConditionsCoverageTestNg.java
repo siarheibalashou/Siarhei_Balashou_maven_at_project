@@ -1,4 +1,4 @@
-package testngsuite;
+package day13.testngsuite;
 
 import day12.TestedClass;
 import org.junit.Test;
