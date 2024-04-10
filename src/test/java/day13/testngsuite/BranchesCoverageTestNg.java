@@ -1,35 +1,35 @@
-package testsjunit;
+package day13.testngsuite;
 
 import day12.TestedClass;
-import org.junit.Test;
+import org.testng.annotations.Test;
+import org.testng.Assert;
 
-import static junit.framework.TestCase.assertEquals;
 
-public class BranchesCoverageJUnit {
+public class BranchesCoverageTestNg {
     TestedClass testedClass = new TestedClass();
 
     @Test
     public void TrueTrue() {
         int number = testedClass.getNumber(-2, -2);
-        assertEquals("conditions not met", 47, number);
+        Assert.assertEquals(number, 47, "conditions not met");
     }
 
     @Test
     public void FalseFalse() {
         int number = testedClass.getNumber(0, 90);
-        assertEquals("conditions not met", 100, number);
+        Assert.assertEquals(number, 90, "conditions not met");
     }
 
     @Test
     public void FalseTrue() {
         int number = testedClass.getNumber(0, 12);
-        assertEquals("conditions not met", 50, number);
+        Assert.assertEquals(number, 50, "conditions not met");
     }
 
     @Test
     public void TrueFalse() {
         int number = testedClass.getNumber(-70, 8);
-        assertEquals("conditions not met", -40, number);
+        Assert.assertEquals(number, -40, "conditions not met");
     }
 
 }

@@ -1,4 +1,4 @@
-package testsjunit;
+package day13.testsjunit;
 
 import day12.TestedClass;
 import org.junit.Test;
