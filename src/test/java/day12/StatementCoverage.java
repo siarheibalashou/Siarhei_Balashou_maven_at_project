@@ -1,3 +1,5 @@
+package day12;
+
 import day12.TestedClass;
 
 public class StatementCoverage {

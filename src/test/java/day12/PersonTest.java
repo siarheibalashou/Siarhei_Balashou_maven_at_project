@@ -1,3 +1,5 @@
+package day12;
+
 import org.junit.Test;
 import people.Person;
 
