@@ -1,21 +1,33 @@
 package day16;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static junit.framework.TestCase.assertEquals;
 
 
 public class BookingTest {
-    public static void main(String[] args) {
-        WebDriver driver = new ChromeDriver();
+    WebDriver driver = new ChromeDriver();
+    private double hotelScore = 6.0;
+
+    @Before
+    public void openBooking() {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("https://booking.com");
+    }
+
+    @Test
+    public void firstBookingTest() {
         driver.findElement(By.xpath("//button[@aria-label='Dismiss sign-in info.']")).click();
         driver.findElement(By.xpath("//input[@name='ss']")).sendKeys("Paris");
         driver.findElement(By.xpath("//div[contains(@class,'a3332d346a') and text()='Paris']")).click();
@@ -49,10 +61,13 @@ public class BookingTest {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", sortButton);
         sortButton.click();
         driver.findElement(By.xpath("//span[text()='Property rating (low to high)']")).click();
+        String hotelScoreElement = driver.findElement(By.xpath("//div[@data-testid='property-card'][1]//div[@data-testid='review-score']/div[1]/div")).getText();
+        assertEquals("Rating of first hotel is not 6.0", String.format("Scored %s", hotelScore), hotelScoreElement);
+    }
 
-        //driver.quit();
-
+    @After
+    public void closeTestBrowser() {
+        driver.quit();
     }
 }
 
-//span[@data-testid='preferred-badge']
