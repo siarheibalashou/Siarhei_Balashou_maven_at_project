@@ -54,12 +54,12 @@ public class W3SchoolsTest {
         for (WebElement listElement : tutorialElementsText) {
             System.out.println(listElement.getText());
             String headerText = listElement.getText().toLowerCase();
-//            if (!headerText.contains(tutorialText.toLowerCase())) {
-//                containsText = false;
-//                break;
-//            }
+            if (!headerText.contains(tutorialText.toLowerCase())) {
+                containsText = false;
+                break;
+            }
         }
-        //  assertEquals(String.format("Element not contains text %s", tutorialText), true, containsText);
+          assertEquals(String.format("Element not contains text %s", tutorialText), true, containsText);
     }
 
 //h3[@class='LC20lb MBeuO DKV0Md']
