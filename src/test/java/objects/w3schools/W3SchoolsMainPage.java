@@ -11,8 +11,6 @@ import java.time.Duration;
 
 public class W3SchoolsMainPage {
     WebDriver driver = Driver.getDriver();
-    WebElement headerField = driver.findElement(By.xpath("//span[text()='Tutorial']"));
-    Actions make = new Actions(driver);
 
     public void openW3SchoolsPage() {
         driver.manage().window().maximize();
@@ -20,13 +18,19 @@ public class W3SchoolsMainPage {
         driver.get("https://www.w3schools.com/java/");
     }
 
-    public String getHeaderText() {
-        return headerField.getText();
+    public WebElement getHeaderElement() {
+        return driver.findElement(By.xpath("//span[text()='Tutorial']"));
     }
 
+    public String getHeaderText() {
+        return getHeaderElement().getText();
+    }
+
+
     public void copyHeaderText() {
+        Actions make = new Actions(driver);
         make
-                .doubleClick(headerField)
+                .doubleClick(getHeaderElement())
                 .keyDown(Keys.LEFT_CONTROL)
                 .sendKeys("c")
                 .keyUp(Keys.LEFT_CONTROL)

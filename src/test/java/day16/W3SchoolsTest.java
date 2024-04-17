@@ -1,5 +1,6 @@
 package day16;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -59,7 +60,12 @@ public class W3SchoolsTest {
                 break;
             }
         }
-          assertEquals(String.format("Element not contains text %s", tutorialText), true, containsText);
+        assertEquals(String.format("Element not contains text %s", tutorialText), true, containsText);
+    }
+
+    @After
+    public void closeTestBrowser() {
+        driver.quit();
     }
 
 //h3[@class='LC20lb MBeuO DKV0Md']
