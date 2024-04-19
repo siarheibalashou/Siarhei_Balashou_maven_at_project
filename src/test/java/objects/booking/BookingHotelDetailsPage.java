@@ -6,11 +6,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Arrays;
 
 public class BookingHotelDetailsPage {
     WebDriver driver = Driver.getDriver();
 
-    public String getRatingOnHotelDetailsPage() {
+    public Double getRatingOnHotelDetailsPage() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
 
         new WebDriverWait(driver, Duration.ofSeconds(30))
@@ -23,7 +24,8 @@ public class BookingHotelDetailsPage {
 
         WebElement hotelDetailsScore = driver.findElement(By.xpath("//div[@data-testid='review-score-right-component']"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", hotelDetailsScore);
-        return hotelDetailsScore.getText();
-
+        //TODO
+        String parsedRating = Arrays.toString(hotelDetailsScore.getText().split("Scored"));
+        return Double.parseDouble(parsedRating);
     }
 }

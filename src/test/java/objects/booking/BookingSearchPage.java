@@ -16,11 +16,7 @@ public class BookingSearchPage {
         checkBoxRating.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
 
-        new WebDriverWait(driver, Duration.ofSeconds(30))
-                .pollingEvery(Duration.ofSeconds(5))
-                .ignoring(NoSuchElementException.class)
-                .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@data-testid='skeleton-loader-card'][1]"))
-                );
+        new WebDriverWait(driver, Duration.ofSeconds(30)).pollingEvery(Duration.ofSeconds(5)).ignoring(NoSuchElementException.class).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@data-testid='skeleton-loader-card'][1]")));
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
@@ -41,5 +37,17 @@ public class BookingSearchPage {
         WebElement hotelDetailsLink = driver.findElement(By.xpath("//h3[@class='aab71f8e4e'][1]/a"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", hotelDetailsLink);
         hotelDetailsLink.click();
+    }
+
+    public void scrollToHotelNumber(int positionOnPage) {
+        WebElement hotelCard = driver.findElement(By.xpath(String.format("//div[@data-testid='property-card'][%s]", positionOnPage)));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", hotelCard);
+    }
+
+    public void changeHotelElement(int positionOfHotelInSearchResults, String backgroundColor, String fontColor) {
+        WebElement hotelCard = driver.findElement(By.xpath(String.format("//div[@data-testid='property-card'][%s]", positionOfHotelInSearchResults)));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", hotelCard);
+        ((JavascriptExecutor) driver).executeScript(String.format("arguments[0].style.backgroundColor='%s'", backgroundColor), hotelCard);
+        ((JavascriptExecutor) driver).executeScript(String.format("arguments[0].style.color='%s'", fontColor), hotelCard);
     }
 }

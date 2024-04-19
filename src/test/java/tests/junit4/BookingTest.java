@@ -1,18 +1,19 @@
-package tests.JUnit4;
+package tests.junit4;
 
 import objects.booking.BookingHotelDetailsPage;
 import objects.booking.BookingMainPage;
 import objects.booking.BookingSearchPage;
-import org.junit.After;
 import org.junit.Test;
+import utils.Utils;
 
 import static junit.framework.TestCase.assertEquals;
+
 
 public class BookingTest {
     BookingMainPage bookingMainPage = new BookingMainPage();
     BookingSearchPage bookingSearchPage = new BookingSearchPage();
     BookingHotelDetailsPage bookingHotelDetailsPage = new BookingHotelDetailsPage();
-    final double HOTEL_SCORE_EXPECTED = 6.4;
+    final double HOTEL_SCORE_EXPECTED = 6.1;
     final String CURRENCY_TOOLTIP_TEXT_EXPECTED = "Select your currency";
     final String LANGUAGE_TOOLTIP_TEXT_EXPECTED = "Select your language";
 
@@ -31,6 +32,7 @@ public class BookingTest {
 
     @Test
     public void highRatingTest() {
+        double limitScore = 9.0;
         bookingMainPage.openBookingInitialPage();
         bookingMainPage.dismissSignInPopup();
         bookingMainPage.inputPlace("Prague");
@@ -40,7 +42,8 @@ public class BookingTest {
         bookingSearchPage.openHotelDetailsPAge();
         //TODO
         bookingHotelDetailsPage.getRatingOnHotelDetailsPage();
-        System.out.println(bookingHotelDetailsPage.getRatingOnHotelDetailsPage());
+        boolean result = bookingHotelDetailsPage.getRatingOnHotelDetailsPage() >= limitScore;
+        assertEquals("Rating less than expected", true, result);
     }
 
     @Test
@@ -55,5 +58,15 @@ public class BookingTest {
         bookingMainPage.openBookingInitialPage();
         bookingMainPage.dismissSignInPopup();
         assertEquals("Incorrect currency tooltip text", LANGUAGE_TOOLTIP_TEXT_EXPECTED, bookingMainPage.getLanguageTooltipText());
+    }
+
+    @Test
+    public void changeBookingColors() throws InterruptedException {
+        bookingMainPage.openBookingInitialPage();
+        bookingMainPage.dismissSignInPopup();
+        bookingMainPage.inputPlace("London");
+        bookingMainPage.clickSearchButton();
+        bookingSearchPage.changeHotelElement(10, "green", "red");
+        Utils.makeCurrentPageScreenshot("C:\\CoursesProject\\screenshots_at\\screenshot1.png");
     }
 }

@@ -1,14 +1,14 @@
-package tests.JUnit4;
+package tests.testng;
 
 import objects.google.GoogleMainPage;
 import objects.google.GoogleSearchResultsPage;
 import objects.w3schools.W3SchoolsMainPage;
-import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import static junit.framework.TestCase.assertEquals;
 
-public class W3SchoolsTest {
+public class W3SchoolsTestNG {
     W3SchoolsMainPage w3SchoolsMainPage = new W3SchoolsMainPage();
     GoogleMainPage googleMainPage = new GoogleMainPage();
     GoogleSearchResultsPage googleSearchResultsPage = new GoogleSearchResultsPage();
@@ -30,8 +30,6 @@ public class W3SchoolsTest {
                 break;
             }
         }
-        //TODO
-        assertEquals(String.format("Element not contains text %s", PART_OF_SEARCH_RESULTS), true, containsText);
+        Assert.assertEquals(containsText, true, String.format("Element not contains text %s", PART_OF_SEARCH_RESULTS));
     }
-
 }
