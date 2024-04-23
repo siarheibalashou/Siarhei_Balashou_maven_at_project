@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Utils {
-    static WebDriver driver = Driver.getDriver();
+    private static WebDriver driver = Driver.getDriver();
 
     public static void makeCurrentPageScreenshot(String screenshotFilePath) {
         File asfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);

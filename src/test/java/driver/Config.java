@@ -1,6 +1,6 @@
 package driver;
 
-public enum BrowserType {
+public enum Config {
     CHROME, FF, REMOTE
 }
 

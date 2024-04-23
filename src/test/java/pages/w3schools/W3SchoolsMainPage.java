@@ -1,4 +1,4 @@
-package objects.w3schools;
+package pages.w3schools;
 
 import driver.Driver;
 import org.openqa.selenium.By;

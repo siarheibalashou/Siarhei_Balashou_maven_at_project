@@ -1,4 +1,4 @@
-package objects.google;
+package pages.google;
 
 import driver.Driver;
 import org.openqa.selenium.By;

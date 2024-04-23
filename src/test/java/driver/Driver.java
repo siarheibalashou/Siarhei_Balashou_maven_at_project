@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.Optional;
 
 public class Driver {
-    static WebDriver driver = null;
+    static WebDriver driver;
 
     public static WebDriver getDriver() {
         if (null == driver) {
@@ -16,9 +16,9 @@ public class Driver {
         return driver;
     }
 
-    protected static BrowserType config =
+    protected static Config config =
             Optional.ofNullable(System.getProperty("CONFIG")).isEmpty() ?
-                    BrowserType.CHROME : BrowserType.valueOf(System.getProperty("CONFIG"));
+                    Config.CHROME : Config.valueOf(System.getProperty("CONFIG"));
 
     private static WebDriver getWebDriver() {
         return switch (config) {

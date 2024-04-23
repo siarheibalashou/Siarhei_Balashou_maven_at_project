@@ -1,20 +1,20 @@
 package tests.testng;
 
-import objects.booking.BookingHotelDetailsPage;
-import objects.booking.BookingMainPage;
-import objects.booking.BookingSearchPage;
+import pages.booking.BookingHotelDetailsPage;
+import pages.booking.BookingMainPage;
+import pages.booking.BookingSearchPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.Utils;
 
 
 public class BookingTestNG {
-    BookingMainPage bookingMainPage = new BookingMainPage();
-    BookingSearchPage bookingSearchPage = new BookingSearchPage();
-    BookingHotelDetailsPage bookingHotelDetailsPage = new BookingHotelDetailsPage();
-    final double HOTEL_SCORE_EXPECTED = 6.1;
-    final String CURRENCY_TOOLTIP_TEXT_EXPECTED = "Select your currency";
-    final String LANGUAGE_TOOLTIP_TEXT_EXPECTED = "Select your language";
+    private BookingMainPage bookingMainPage = new BookingMainPage();
+    private BookingSearchPage bookingSearchPage = new BookingSearchPage();
+    private BookingHotelDetailsPage bookingHotelDetailsPage = new BookingHotelDetailsPage();
+    private final double HOTEL_SCORE_EXPECTED = 6.1;
+    private final String CURRENCY_TOOLTIP_TEXT_EXPECTED = "Select your currency";
+    private final String LANGUAGE_TOOLTIP_TEXT_EXPECTED = "Select your language";
 
     @Test
     public void lowRatingTest() {

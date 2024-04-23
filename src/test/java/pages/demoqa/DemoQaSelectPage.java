@@ -1,4 +1,4 @@
-package objects.demoqa;
+package pages.demoqa;
 
 import driver.Driver;
 import org.openqa.selenium.By;
