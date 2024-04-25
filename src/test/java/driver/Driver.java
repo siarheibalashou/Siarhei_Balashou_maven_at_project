@@ -43,4 +43,8 @@ public class Driver {
     private static WebDriver getRemoteDriver() {
         return null;
     }
+
+    public static void closeBrowser() {
+        driver.quit();
+    }
 }

@@ -12,10 +12,10 @@ import java.io.IOException;
 public class Utils {
     private static WebDriver driver = Driver.getDriver();
 
-    public static void makeCurrentPageScreenshot(String screenshotFilePath) {
+    public static void makeCurrentPageScreenshot(String screenshotName) {
         File asfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(asfile, new File(screenshotFilePath));
+            FileUtils.copyFile(asfile, new File(String.format("C:\\CoursesProject\\screenshots_at\\%s", screenshotName)));
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }

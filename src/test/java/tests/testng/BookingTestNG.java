@@ -1,5 +1,8 @@
 package tests.testng;
 
+import driver.Driver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import pages.booking.BookingHotelDetailsPage;
 import pages.booking.BookingMainPage;
 import pages.booking.BookingSearchPage;
@@ -12,14 +15,16 @@ public class BookingTestNG {
     private BookingMainPage bookingMainPage = new BookingMainPage();
     private BookingSearchPage bookingSearchPage = new BookingSearchPage();
     private BookingHotelDetailsPage bookingHotelDetailsPage = new BookingHotelDetailsPage();
-    private final double HOTEL_SCORE_EXPECTED = 6.1;
-    private final String CURRENCY_TOOLTIP_TEXT_EXPECTED = "Select your currency";
-    private final String LANGUAGE_TOOLTIP_TEXT_EXPECTED = "Select your language";
+
+    @BeforeTest
+    public void before() {
+        bookingMainPage.openBookingInitialPage();
+        bookingMainPage.dismissSignInPopup();
+    }
 
     @Test
     public void lowRatingTest() {
-        bookingMainPage.openBookingInitialPage();
-        bookingMainPage.dismissSignInPopup();
+        final double HOTEL_SCORE_EXPECTED = 6.1;
         bookingMainPage.inputPlace("Paris");
         bookingMainPage.inputPersons(4, 2);
         bookingMainPage.inputDate();
@@ -32,8 +37,6 @@ public class BookingTestNG {
     @Test
     public void highRatingTest() {
         double limitScore = 9.0;
-        bookingMainPage.openBookingInitialPage();
-        bookingMainPage.dismissSignInPopup();
         bookingMainPage.inputPlace("Prague");
         bookingMainPage.inputPersons(2, 1);
         bookingMainPage.clickSearchButton();
@@ -47,26 +50,27 @@ public class BookingTestNG {
 
     @Test
     public void currencyTooltipTest() {
-        bookingMainPage.openBookingInitialPage();
-        bookingMainPage.dismissSignInPopup();
+        final String CURRENCY_TOOLTIP_TEXT_EXPECTED = "Select your currency";
         Assert.assertEquals(bookingMainPage.getCurrencyTooltipText(), CURRENCY_TOOLTIP_TEXT_EXPECTED, "Incorrect currency tooltip text");
     }
 
     @Test
     public void languageTooltipTest() {
-        bookingMainPage.openBookingInitialPage();
-        bookingMainPage.dismissSignInPopup();
-        Assert.assertEquals(bookingMainPage.getLanguageTooltipText(), LANGUAGE_TOOLTIP_TEXT_EXPECTED, "Incorrect currency tooltip text");
+        final String LANGUAGE_TOOLTIP_TEXT_EXPECTED = "Select your language";
+        Assert.assertEquals(bookingMainPage.getLanguageTooltipText(), LANGUAGE_TOOLTIP_TEXT_EXPECTED, "Incorrect language tooltip text");
     }
 
     @Test
-    public void changeBookingColors() throws InterruptedException {
-        bookingMainPage.openBookingInitialPage();
-        bookingMainPage.dismissSignInPopup();
+    public void changeBookingColors() {
         bookingMainPage.inputPlace("London");
         bookingMainPage.clickSearchButton();
         bookingSearchPage.changeHotelElement(10, "green", "red");
-        Utils.makeCurrentPageScreenshot("C:\\CoursesProject\\screenshots_at\\screenshot1.png");
+        Utils.makeCurrentPageScreenshot("screenshot1123123213.png");
         Assert.assertTrue(true);
+    }
+
+    @AfterTest
+    public void after() {
+        Driver.closeBrowser();
     }
 }
