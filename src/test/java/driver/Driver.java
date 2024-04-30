@@ -47,4 +47,6 @@ public class Driver {
     public static void closeBrowser() {
         driver.quit();
     }
+    Object object = new Object();
+
 }
